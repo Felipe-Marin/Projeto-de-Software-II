@@ -1,96 +1,288 @@
-<html>
-<link rel="stylesheet" href="./styles/material.min.css">
-<script src="./styles/material.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="mdl-layout mdl-js-layout mdl-layout--no-desktop-drawer-button">
-    <header class="mdl-layout__header">
-        <div class="mdl-layout-icon"></div>
-        <div class="mdl-layout__header-row">
-            <span class="mdl-layout__title">Coleta Seletiva</span>
-            <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="#">Link 1</a>
-                <a class="mdl-navigation__link" href="#">Link 2</a>
-                <a class="mdl-navigation__link" href="#">Link 3</a>
-                <a class="mdl-navigation__link" href="#">Link 4</a>
-                <a class="mdl-navigation__link" href="#">Link 5</a>
-            </nav>
-        </div>
-    </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout__title">Coleta Seletiva</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="#">Link 1</a>
-            <a class="mdl-navigation__link" href="#">Link 2</a>
-            <a class="mdl-navigation__link" href="#">Link 3</a>
-            <a class="mdl-navigation__link" href="#">Link 4</a>
-            <a class="mdl-navigation__link" href="#">Link 5</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coleta Seletiva Solidária UFSM</title>
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.css">
+    <link rel="stylesheet" type="text/css" href="styles/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" charset="utf8" src="scripts/jquery-1.12.4.js"></script>
+    <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $(".button-collapse").sideNav();
+                $('.collapsible').collapsible({
+                    onOpen: function(){$('.tap-target').tapTarget('open');}
+                });
+                $('.modal').modal();
+                searchTable = $('#table1').DataTable({responsive: true, dom: 'tp'});
+                $('#searchbtn').click(function(){
+                    $('#modal1').modal('open');
+                    $('#searchinput').focus();
+                })
+                $('#searchinput').keyup(function(){
+                    searchTable.search($(this).val()).draw();
+                })
+            });
+            
+    </script>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper light-green darken-4">
+                <a href="#" class="brand-logo">Coleta Seletiva UFSM</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="link.html">Link 1</a></li>
+                    <li><a href="link.html">Link 2</a></li>
+                    <li><a href="link.html">Link 3</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="link.html">Link 1</a></li>
+                    <li><a href="link.html">Link 2</a></li>
+                    <li><a href="link.html">Link 3</a></li>
+                </ul>
+            </div>
         </nav>
     </div>
-    <main class="mdl-layout__content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card mdl-shadow--2dp" style="text-align:center">
-                    <div class="mdl-card__title mdl-card--expand">
-                      <h2 class="mdl-card__title-text">Resíduos orgânicos</h2>
-                    </div>
-                    <div>
-                        <img src="images/lixeiramarrom.png" width="256" height="256"></img>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        View Updates
-                      </a>
-                    </div>
+    <div class="fixed-action-btn">
+        <a id="searchbtn" class="waves-effect waves-light btn btn-floating" >
+            <i class="material-icons light-green accent-4">search</i>
+        </a>    
+    </div>
+    <div id="modal1" class="modal">
+        <div>
+            <a class="btn-flat btn-large waves-effect waves-teal modal-close"><i class="material-icons">arrow_back</i></a>
+        </div>
+        <div class="modal-content">
+            <h4>Busca de Resíduos</h4>
+            <div class="input-field">
+                    <input id="searchinput" type="text" name="residuos" class="search">
+                    <label for="searchinput">Buscar</label>
                 </div>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card mdl-shadow--2dp" style="text-align:center">
-                    <div class="mdl-card__title mdl-card--expand">
-                      <h2 class="mdl-card__title-text">Resíduos recicláveis</h2>
-                    </div>
-                    <div>
-                        <img src="images/lixeiraverde.png" width="256" height="256"></img>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        View Updates
-                      </a>
-                    </div>
-                </div>
-            </div>
-            <div class="mdl-cell mdl-cell--4-col">
-                <div class="mdl-card mdl-shadow--2dp" style="text-align:center">
-                    <div class="mdl-card__title mdl-card--expand">
-                      <h2 class="mdl-card__title-text">Rejeitos</h2>
-                    </div>
-                    <div>
-                        <img src="images/lixeiracinza.png" width="256" height="256"></img>
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Aenan convallis.
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        View Updates
-                      </a>
-                    </div>
-                </div>
+            <table class="display" id="table1">
+                        <thead>
+                            <tr>
+                                <th title="Field #1">Resíduo</th>
+                                <th title="Field #2">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Casca de frutas e legumes</td>
+                                <td>Orgânico</td>
+                            </tr>
+                            <tr>
+                                <td>Erva mate</td>
+                                <td>Orgânico</td>
+                            </tr>
+                            <tr>
+                                <td>Folhas e verduras</td>
+                                <td>Orgânico</td>
+                            </tr>
+                            <tr>
+                                <td>Pó de café</td>
+                                <td>Orgânico</td>
+                            </tr>
+                            <tr>
+                                <td>Restos de alimentos</td>
+                                <td>Orgânico</td>
+                            </tr>
+                            <tr>
+                                <td>Sachês de chá</td>
+                                <td>Orgânico</td>
+                            </tr>
+                            <tr>
+                                <td>Caixas de leite, achocolatado e suco</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Embalagens longa vida</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Copos de iogurte, margarina e requeijão</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Copos plásticos descartáveis</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Embalagens de produtos de higiene</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Tubo de pasta de dente</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Embalagens plásticas de produtos de limpeza</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Esponjas de lavar louça</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Garrafas PET</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Garrafas térmicas</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Jornais, revistas, livros e apostilas</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Latas de refrigerante e conserva</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Panos de limpeza tipo Perfex</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Papéis brancos e coloridos (ideal separar cores e não amassar)</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Papelão</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Pratos aluminizados (marmita ou quentinha)</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Sacos e sacolas plásticas</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Sucatas metálica em geral</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Vassouras e cabos metálicos</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Vidros de geléia, garrafas de bebida, copos (colocar em uma caixa e identificar: risco de acidente)</td>
+                                <td>Reciclável</td>
+                            </tr>
+                            <tr>
+                                <td>Bitucas de cigarro</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Chicletes</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Etiquetas adesivadas</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Fitas adesivas em geral (crepe, durex)</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Guardanapos e toalhas de papel</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Isopor (pratos, bandejas, copos de café e embalagens em geral)</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Lenços de papel</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Materiais escolares (canetas, lápis)</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Palitos de dentes</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Papel celofane (embalagem de palito, rapaduras e sobremesas)</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Papel higiênico usado</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Papel plastificado (embalagem de folhas de ofício)</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Papel metalizado (batata palha, barra de cereal)</td>
+                                <td>Rejeito</td>
+                            </tr>
+                            <tr>
+                                <td>Restos de madeira e cabos de vassoura</td>
+                                <td>Rejeito</td>
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+    <div class="tap-target-wrapper">
+        <div class="tap-target light-green accent-4" data-activates="searchbtn">
+            <div class="tap-target-content">
+                <h5>Em dúvida onde por seus resíduos?</h5>
+                <p>Use a busca e descubra.</p>
             </div>
         </div>
-        <iframe src="https://www.google.com/maps/d/embed?mid=10wfvoXMGK8jLaOuNw7uaMsWxEQw" width="80%" height="80%" style="display: block; margin-left: auto; margin-right: auto;"></iframe>
-    </main>
-</div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m10 l10">
+                <div class="section">
+                    <h4>O que é a Coleta Seletiva Solidária UFSM</h4>
+                    <p>Consiste na coleta dos resíduos recicláveis gerados na UFSM por associações de selecionadores de resíduos habilitadas, de acordo com o Decreto 5940/2006.</p>
+                </div>
+                <div class="section">
+                    <h4>Tipos de Resíduos</h4>
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><img src="images/lixeiraverde.png" style="width:36px;height:36px;"></img>Resíduos Recicláveis</div>
+                            <div class="collapsible-body"><span>Os resíduos recicláveis (contêineres verdes) são papéis, metais, vidros e plásticos. Esses resíduos são recolhidos e destinados às Associações Habilitadas, os quais são triados e a classificados de acordo com a existência de mercado comprador. </span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><img src="images/lixeiramarrom.png" style="width:36px;height:36px;"></img>Resíduos Orgânicos</div>
+                            <div class="collapsible-body"><span>Os resíduos orgânicos (contêineres marrons) são enviados à unidade de compostagem do Colégio Politécnico da UFSM.</span></div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><img src="images/lixeiracinza.png" style="width:36px;height:36px;"></img>Rejeitos</div>
+                            <div class="collapsible-body"><span>Os rejeitos (contêineres pretos ou cinzas) são recolhidos pela Coleta Pública realizada pela Prefeitura Municipal e são destinados ao aterro da cidade. </span></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h4>Localizacao dos containers</h4>
+                </div>
+                <div class="section">
+                    <h4>Quem faz a coleta?</h4>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+</body>
+
 
 </html>
