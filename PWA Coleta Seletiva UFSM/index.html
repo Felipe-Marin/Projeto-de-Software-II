@@ -74,24 +74,30 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper light-green darken-4">
-                <a href="#" class="brand-logo">Coleta Seletiva UFSM</a>
-                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <a href="#" class="brand-logo hide-on-med-and-down">Coleta Seletiva UFSM</a>
+                <a href="#" class="hide-on-large-only center-align" style="font-size:25px">Coleta Seletiva UFSM</a>
+                <!--a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="link.html">Link 1</a></li>
-                    <li><a href="link.html">Link 2</a></li>
+                    <li><a href="#Localizacao">Localização dos containers</a></li>
+                    <li><a href="#QuemFaz">Quem faz a coleta?</a></li>
                     <li><a href="link.html">Link 3</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
-                    <li><a href="link.html">Link 1</a></li>
-                    <li><a href="link.html">Link 2</a></li>
+                    <li><a href="#Localizacao">Localização dos containers</a></li>
+                    <li><a href="#QuemFaz">Quem faz a coleta?</a></li>
                     <li><a href="link.html">Link 3</a></li>
-                </ul>
+                </ul-->
             </div>
         </nav>
     </div>
     <div class="container">
         <div class="row">
             <div class="col s12">
+                <div class="section">
+                    <h4>O que é a Coleta Seletiva Solidária UFSM</h4>
+                    <p>Consiste na coleta dos resíduos recicláveis gerados na UFSM por associações de selecionadores de resíduos
+                        habilitadas, de acordo com o Decreto 5940/2006.</p>
+                </div>
                 <div class="search-wrapper card">
                     <input id="search" placeholder="Buscar resíduos"><i class="material-icons">search</i>
                 </div>
@@ -104,11 +110,6 @@
                             </tr>
                         </thead>
                     </table>
-                </div>
-                <div class="section">
-                    <h4>O que é a Coleta Seletiva Solidária UFSM</h4>
-                    <p>Consiste na coleta dos resíduos recicláveis gerados na UFSM por associações de selecionadores de resíduos
-                        habilitadas, de acordo com o Decreto 5940/2006.</p>
                 </div>
                 <div class="section">
                     <h4>Tipos de Resíduos</h4>
@@ -127,12 +128,15 @@
                         </li>
                     </ul>
                 </div>
-                <div class="section">
+                <div class="divider"></div>
+                <div id="Localizacao" class="section">
                     <h4>Localização dos containers</h4>
                     <div id="map" style="width:90%; height:400px;"></div>
                 </div>
-                <div class="section">
+                <div class="divider"></div>
+                <div id="QuemFaz" class="section">
                     <h4>Quem faz a coleta?</h4>
+                    <p>A coleta é realizada semanalmente, por quatro associações da cidade, habilitadas em processo público aberto pela UFSM. São elas: Associação de Selecionadores de Materiais Recicláveis (ASMAR), Associação de Materiais Recicláveis Pôr do Sol (ARPS), Associação de Reciclagem de Seletivo Esperança (ARSELE) e Associação Noêmia Lazzarini.</p>
                 </div>
             </div>
 
