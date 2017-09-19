@@ -41,6 +41,32 @@
             });
         });
     </script>
+    <script>
+        function initMap(){
+            var center = {lat: -29.714315714425528, lng: -53.71471834680483};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: center
+            });
+            var data = {};
+            $.ajax({
+                url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/2/public/values?alt=json',
+                data: data, 
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data.feed.entry, function(index, item) {
+                        console.log(parseFloat(item.gsx$latitude.$t));
+                        var marker = new google.maps.Marker({
+                            position: {lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t)},
+                            map: map,
+                            title: item.gsx$nome.$t
+                        });
+                    });
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap"></script>
 
 </head>
 
@@ -103,6 +129,7 @@
                 </div>
                 <div class="section">
                     <h4>Localizacao dos containers</h4>
+                    <div id="map" style="width:90%; height:400px;"></div>
                 </div>
                 <div class="section">
                     <h4>Quem faz a coleta?</h4>
