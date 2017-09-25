@@ -14,6 +14,7 @@
     <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
     <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
     <script type="text/javascript">
+        var markers = [];
         $(document).ready(function () {
             $(".button-collapse").sideNav();
             $('.collapsible').collapsible();
@@ -39,6 +40,35 @@
                     searchTable.search($(this).val()).draw();                
                 }
             });
+            filterMarkers = function(){
+                $.each(markers, function(index, item){
+                    console.log(item.segunda + ' check box ' + $('#segunda').is(':checked'));
+                    item.marker.setVisible(false);
+                    if((item.segunda && $('#segunda').is(':checked'))
+                    || (item.terca && $('#terca').is(':checked'))
+                    || (item.quarta && $('#quarta').is(':checked'))
+                    || (item.quinta && $('#quinta').is(':checked'))
+                    || (item.sexta && $('#sexta').is(':checked'))){
+                        console.log("Visible");
+                        item.marker.setVisible(true);
+                    }
+                });
+            }
+            $('#segunda').click(function(){
+                filterMarkers();
+            });
+            $('#terca').click(function(){
+                filterMarkers();
+            });
+            $('#quarta').click(function(){
+                filterMarkers();
+            });
+            $('#quinta').click(function(){
+                filterMarkers();
+            });
+            $('#sexta').click(function(){
+                filterMarkers();
+            });
         });
     </script>
     <script>
@@ -48,6 +78,7 @@
                 zoom: 15,
                 center: center
             });
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('formDias'));
             var data = {};
             $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/2/public/values?alt=json',
@@ -55,12 +86,20 @@
                 dataType: 'json',
                 success: function(data) {
                     $.each(data.feed.entry, function(index, item) {
-                        console.log(parseFloat(item.gsx$latitude.$t));
                         var marker = new google.maps.Marker({
                             position: {lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t)},
                             map: map,
                             title: item.gsx$nome.$t
                         });
+                        var local = {
+                            segunda: (item.gsx$segunda.$t == 's'),
+                            terca: (item.gsx$terça.$t == 's'),
+                            quarta: (item.gsx$quarta.$t == 's'),
+                            quinta: (item.gsx$quinta.$t == 's'),
+                            sexta: (item.gsx$sexta.$t == 's'),
+                            marker: marker
+                        };
+                        markers.push(local);
                     });
                 }
             });
@@ -132,6 +171,30 @@
                 <div id="Localizacao" class="section">
                     <h4>Localização dos containers</h4>
                     <div id="map" style="width:90%; height:400px;"></div>
+                    <div id="formDias">
+                        <form action="#">
+                            <p>
+                                <input type="checkbox" id="segunda" checked="checked"/>
+                                <label for="segunda">Segunda</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" id="terca" checked="checked"/>
+                                <label for="terca">Terça</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" id="quarta" checked="checked"/>
+                                <label for="quarta">Quarta</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" id="quinta" checked="checked"/>
+                                <label for="quinta">Quinta</label>
+                            </p>
+                            <p>
+                                <input type="checkbox" id="sexta" checked="checked"/>
+                                <label for="sexta">Sexta</label>
+                            </p>
+                        </form>
+                    </div>
                 </div>
                 <div class="divider"></div>
                 <div id="QuemFaz" class="section">
