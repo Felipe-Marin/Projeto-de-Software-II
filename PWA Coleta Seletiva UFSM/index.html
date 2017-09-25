@@ -89,7 +89,8 @@
                         var marker = new google.maps.Marker({
                             position: {lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t)},
                             map: map,
-                            title: item.gsx$nome.$t
+                            title: item.gsx$nome.$t,
+                            icon: 'images/mapicon.png'
                         });
                         var local = {
                             segunda: (item.gsx$segunda.$t == 's'),
@@ -170,28 +171,28 @@
                 <div class="divider"></div>
                 <div id="Localizacao" class="section">
                     <h4>Localização dos containers</h4>
-                    <div id="map" style="width:90%; height:400px;"></div>
-                    <div id="formDias">
+                    <div id="map" style="width:100%; height:400px;"></div>
+                    <div id="formDias" class="z-depth-1" style="background:#fff; margin:10px;padding:10px;">
                         <form action="#">
                             <p>
                                 <input type="checkbox" id="segunda" checked="checked"/>
-                                <label for="segunda">Segunda</label>
+                                <label for="segunda" class="black-text">Segunda</label>
                             </p>
                             <p>
                                 <input type="checkbox" id="terca" checked="checked"/>
-                                <label for="terca">Terça</label>
+                                <label for="terca" class="black-text">Terça</label>
                             </p>
                             <p>
                                 <input type="checkbox" id="quarta" checked="checked"/>
-                                <label for="quarta">Quarta</label>
+                                <label for="quarta" class="black-text">Quarta</label>
                             </p>
                             <p>
                                 <input type="checkbox" id="quinta" checked="checked"/>
-                                <label for="quinta">Quinta</label>
+                                <label for="quinta" class="black-text">Quinta</label>
                             </p>
                             <p>
                                 <input type="checkbox" id="sexta" checked="checked"/>
-                                <label for="sexta">Sexta</label>
+                                <label for="sexta" class="black-text">Sexta</label>
                             </p>
                         </form>
                     </div>
