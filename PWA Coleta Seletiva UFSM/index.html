@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#33691e">
     <title>Coleta Seletiva Solidária UFSM</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.css">
     <link rel="stylesheet" type="text/css" href="styles/materialize.css">
     <link rel="stylesheet" type="text/css" href="styles/search.css">
@@ -14,6 +16,11 @@
     <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
     <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
     <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+            .register('./sw.js')
+            .then(function() { console.log('Service Worker Registered'); });
+        }
         var markers = [];
         $(document).ready(function () {
             $(".button-collapse").sideNav();
@@ -107,6 +114,7 @@
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap"></script>
+    <link rel="manifest" href="/manifest.json">
 
 </head>
 
