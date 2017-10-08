@@ -22,11 +22,30 @@
             .then(function() { console.log('Service Worker Registered'); });
         }
         var markers = [];
+        var searchTable;
+        var dataResiduos = {};
         $(document).ready(function () {
             $(".button-collapse").sideNav();
             $('.collapsible').collapsible();
             $('#results').hide();
-            searchTable = $('#table1').DataTable({
+            $.ajax({
+                url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/od6/public/values?alt=json',
+                cache: true,
+                data: dataResiduos, 
+                dataType: 'json',
+                success: function(data) {
+                    searchTable = $('#table1').DataTable({
+                        "responsive": true,
+                        "dom": 'tp',
+                        "data": data.feed.entry,
+                        "columns": [
+                            {"data": "gsx$residuo.$t"},
+                            {"data": "gsx$tipo.$t"}
+                        ]
+                    });
+                }
+            });
+            /*searchTable = $('#table1').DataTable({
                 "responsive": true,
                 "dom": 'tp',
                 "bServerSide": false,
@@ -37,7 +56,7 @@
                     { "mDataProp": "gsx$residuo.$t" },
                     { "mDataProp": "gsx$tipo.$t" },
                 ]
-            });
+            });*/
             $('#search').keyup(function () {
                 if ($('#search').val() == '') {
                     $('#results').hide();
@@ -89,6 +108,7 @@
             var data = {};
             $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/2/public/values?alt=json',
+                cache: true,
                 data: data, 
                 dataType: 'json',
                 success: function(data) {
@@ -113,7 +133,7 @@
             });
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6QEqPesjp59dV_Iqa0T56y_NcnTMSbjw&callback=initMap"></script>
     <link rel="manifest" href="/manifest.json">
 
 </head>

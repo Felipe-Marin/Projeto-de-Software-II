@@ -1,4 +1,4 @@
-importScripts('workbox-sw.prod.v2.0.3.js');
+importScripts('workbox-sw.prod.v2.1.0.js');
 
 /**
  * DO NOT EDIT THE FILE MANIFEST ENTRY
@@ -18,10 +18,6 @@ importScripts('workbox-sw.prod.v2.0.3.js');
  * accordingly.
  */
 const fileManifest = [
-  {
-    "url": "build/workbox-sw.prod.v2.0.3.js",
-    "revision": "60b4da760c6a02cbbf5efc80c4da7090"
-  },
   {
     "url": "DataTables/DataTables-1.10.15/css/dataTables.bootstrap.css",
     "revision": "46a18cea358250ebca28adcf454a791f"
@@ -288,7 +284,7 @@ const fileManifest = [
   },
   {
     "url": "index.html",
-    "revision": "0e9a5a10cc62e7e37f6cdf88f80add6a"
+    "revision": "f28c5b8d9dc0649fa0ef275b6a98377b"
   },
   {
     "url": "manifest.json",
@@ -309,10 +305,6 @@ const fileManifest = [
   {
     "url": "scripts/materialize.min.js",
     "revision": "72604b4dd26e411dd6d7290b9f6c1d9c"
-  },
-  {
-    "url": "serviceWorker.js",
-    "revision": "4aa57c0117c68892e9b344e2bb1f5b3f"
   },
   {
     "url": "styles/jquery.dataTables.min.css",
