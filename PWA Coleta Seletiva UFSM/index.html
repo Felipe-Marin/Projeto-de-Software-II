@@ -98,6 +98,11 @@
         });
     </script>
     <script>
+        $(document).ready(function(){
+            if(!navigator.onLine){
+                $('#offlineAviso').show();
+            }
+        });
         window.addEventListener("offline", function(){
             $('#offlineAviso').show();
         });
