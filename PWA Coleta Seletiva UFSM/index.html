@@ -98,6 +98,14 @@
         });
     </script>
     <script>
+        window.addEventListener("offline", function(){
+            $('#offlineAviso').show();
+        });
+        window.addEventListener("online", function(){
+            $('#offlineAviso').hide();
+        });
+    </script>
+    <script>
         function initMap(){
             var center = {lat: -29.714315714425528, lng: -53.71471834680483};
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -199,6 +207,7 @@
                 <div class="divider"></div>
                 <div id="Localizacao" class="section">
                     <h4>Localização dos containers</h4>
+                    <p id="offlineAviso" style="display:none"><b>Atenção: </b>Seu dispositivo está offline, algumas funcionalidades do mapa não estão disponíveis.</p>
                     <div id="map" style="width:100%; height:400px;"></div>
                     <div id="formDias" class="z-depth-1" style="background:#fff; margin:10px;padding:10px;">
                         <form action="#">
