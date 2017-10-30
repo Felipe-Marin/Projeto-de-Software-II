@@ -18,101 +18,60 @@
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker
-            .register('./sw.js')
-            .then(function() { console.log('Service Worker Registered'); });
+                .register('./sw.js')
+                .then(function () { console.log('Service Worker Registered'); });
         }
-        var markers = [];
         var searchTable;
         var dataResiduos = {};
         $(document).ready(function () {
             $(".button-collapse").sideNav();
             $('.collapsible').collapsible();
+            $('.carousel').carousel();
             $('#results').hide();
             $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/od6/public/values?alt=json',
                 cache: true,
-                data: dataResiduos, 
+                data: dataResiduos,
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     searchTable = $('#table1').DataTable({
                         "responsive": true,
                         "dom": 'tp',
                         "data": data.feed.entry,
                         "columns": [
-                            {"data": "gsx$residuo.$t"},
-                            {"data": "gsx$tipo.$t"}
+                            { "data": "gsx$residuo.$t" },
+                            { "data": "gsx$tipo.$t" }
                         ]
                     });
                 }
             });
-            /*searchTable = $('#table1').DataTable({
-                "responsive": true,
-                "dom": 'tp',
-                "bServerSide": false,
-                "bProcessing": true,
-                "sAjaxDataProp": "feed.entry",
-                "sAjaxSource": "https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/od6/public/values?alt=json",
-                "aoColumns": [
-                    { "mDataProp": "gsx$residuo.$t" },
-                    { "mDataProp": "gsx$tipo.$t" },
-                ]
-            });*/
             $('#search').keyup(function () {
                 if ($('#search').val() == '') {
                     $('#results').hide();
                 }
                 else {
                     $('#results').show();
-                    searchTable.search($(this).val()).draw();                
+                    searchTable.search($(this).val()).draw();
                 }
-            });
-            filterMarkers = function(){
-                $.each(markers, function(index, item){
-                    console.log(item.segunda + ' check box ' + $('#segunda').is(':checked'));
-                    item.marker.setVisible(false);
-                    if((item.segunda && $('#segunda').is(':checked'))
-                    || (item.terca && $('#terca').is(':checked'))
-                    || (item.quarta && $('#quarta').is(':checked'))
-                    || (item.quinta && $('#quinta').is(':checked'))
-                    || (item.sexta && $('#sexta').is(':checked'))){
-                        console.log("Visible");
-                        item.marker.setVisible(true);
-                    }
-                });
-            }
-            $('#segunda').click(function(){
-                filterMarkers();
-            });
-            $('#terca').click(function(){
-                filterMarkers();
-            });
-            $('#quarta').click(function(){
-                filterMarkers();
-            });
-            $('#quinta').click(function(){
-                filterMarkers();
-            });
-            $('#sexta').click(function(){
-                filterMarkers();
             });
         });
     </script>
     <script>
-        $(document).ready(function(){
-            if(!navigator.onLine){
+        $(document).ready(function () {
+            if (!navigator.onLine) {
                 $('#offlineAviso').show();
             }
         });
-        window.addEventListener("offline", function(){
+        window.addEventListener("offline", function () {
             $('#offlineAviso').show();
         });
-        window.addEventListener("online", function(){
+        window.addEventListener("online", function () {
             $('#offlineAviso').hide();
         });
     </script>
     <script>
-        function initMap(){
-            var center = {lat: -29.714315714425528, lng: -53.71471834680483};
+        function initMap() {
+            var center = { lat: -29.714315714425528, lng: -53.71471834680483 };
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
                 center: center
@@ -122,25 +81,23 @@
             $.ajax({
                 url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/2/public/values?alt=json',
                 cache: true,
-                data: data, 
+                data: data,
                 dataType: 'json',
-                success: function(data) {
-                    $.each(data.feed.entry, function(index, item) {
+                success: function (data) {
+                    $.each(data.feed.entry, function (index, item) {
+                        var icon;
+                        if (item.gsx$tipo.$t == 'reciclavel') {
+                            icon = 'images/mapicon_reciclavel.png'
+                        }
+                        else {
+                            icon = 'images/mapicon_eletronico.png'
+                        }
                         var marker = new google.maps.Marker({
-                            position: {lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t)},
+                            position: { lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t) },
                             map: map,
                             title: item.gsx$nome.$t,
-                            icon: 'images/mapicon.png'
+                            icon: icon
                         });
-                        var local = {
-                            segunda: (item.gsx$segunda.$t == 's'),
-                            terca: (item.gsx$terça.$t == 's'),
-                            quarta: (item.gsx$quarta.$t == 's'),
-                            quinta: (item.gsx$quinta.$t == 's'),
-                            sexta: (item.gsx$sexta.$t == 's'),
-                            marker: marker
-                        };
-                        markers.push(local);
                     });
                 }
             });
@@ -173,14 +130,14 @@
     </div>
     <div class="container">
         <div class="row">
+            <div class="col s12 l4 offset-l4"><img src="images/uma.png" class="responsive-img"></div>
+            
+        </div>
+        <div class="row">
             <div class="col s12">
-                <div class="section">
-                    <h4>O que é a Coleta Seletiva Solidária UFSM</h4>
-                    <p>Consiste na coleta dos resíduos recicláveis gerados na UFSM por associações de selecionadores de resíduos
-                        habilitadas, de acordo com o Decreto 5940/2006.</p>
-                </div>
                 <div class="search-wrapper card">
-                    <input id="search" placeholder="Buscar resíduos"><i class="material-icons">search</i>
+                    <input id="search" placeholder="Buscar resíduos">
+                    <i class="material-icons">search</i>
                 </div>
                 <div id="results">
                     <table class="display" id="table1" style="width:90%">
@@ -193,56 +150,165 @@
                     </table>
                 </div>
                 <div class="section">
-                    <h4>Tipos de Resíduos</h4>
+                    <h4>O que é a Coleta Seletiva Solidária UFSM?</h4>
+                    <p>É a coleta dos resíduos recicláveis gerados na UFSM em cumprimento ao Decreto nº 5.940/2006 e tem como
+                        parceiros as Associações de Selecionadores de Santa Maria.</p>
+                    <p>Início das atividades: 6 de junho de 2016.</p>
+                    <p>Pontos de recolhimento no campus: 60</p>
+                    <p>Responsáveis pela gestão: Setor de Planejamento Ambiental e COMPLANA.</p>
+                </div>
+                <div class="section">
+                    <h4>Como funciona a coleta?</h4>
+                    <p>A coleta ocorre todas às segundas, quartas e quintas-feiras, a partir das 8 h, exceto nos feriados.</p>
+                    <p>Cada Associação é responsável pela coleta durante uma semana havendo rodízio ao longo do ano.</p>
+                    <p><a href="http://coral.ufsm.br/coletaseletiva/">Veja aqui</a> rota e calendário da coleta seletiva.</p>
+                </div>
+                <div class="section">
+                    <h4>O que a coleta seletiva recolhe?</h4>
                     <ul class="collapsible popout" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header"><img src="images/lixeiraverde.png" style="width:36px;height:36px;"></img>Resíduos Recicláveis</div>
-                            <div class="collapsible-body"><span>Os resíduos recicláveis (contêineres verdes) são papéis, metais, vidros e plásticos. Esses resíduos são recolhidos e destinados às Associações Habilitadas, os quais são triados e a classificados de acordo com a existência de mercado comprador. </span></div>
+                            <div class="collapsible-header">
+                                <img src="images/lixeiraverde.png" style="width:36px;height:36px;"></img>Resíduos Recicláveis</div>
+                            <div class="collapsible-body">
+                                <span>Os resíduos recicláveis (contêineres verdes) são papéis/papelão, metais, vidros e plásticos.
+                                    Esses resíduos são recolhidos semanalmente e destinados às Associações de Selecionadores.
+                                    Cabe às Associações realizar a triagem, armazenamento e venda dos materiais. </span>
+                            </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><img src="images/lixeiramarrom.png" style="width:36px;height:36px;"></img>Resíduos Orgânicos</div>
-                            <div class="collapsible-body"><span>Os resíduos orgânicos (contêineres marrons) são enviados à unidade de compostagem do Colégio Politécnico da UFSM.</span></div>
+                            <div class="collapsible-header">
+                                <img src="images/lixeiramarrom.png" style="width:36px;height:36px;"></img>Resíduos Orgânicos</div>
+                            <div class="collapsible-body">
+                                <span>Os resíduos orgânicos são coletados diariamente nos restaurantes e lancherias e enviados
+                                    à unidade de compostagem do Colégio Politécnico da UFSM.</span>
+                            </div>
                         </li>
                         <li>
-                            <div class="collapsible-header"><img src="images/lixeiracinza.png" style="width:36px;height:36px;"></img>Rejeitos</div>
-                            <div class="collapsible-body"><span>Os rejeitos (contêineres pretos ou cinzas) são recolhidos pela Coleta Pública realizada pela Prefeitura Municipal e são destinados ao aterro da cidade. </span></div>
+                            <div class="collapsible-header">
+                                <img src="images/lixeiracinza.png" style="width:36px;height:36px;"></img>Rejeitos</div>
+                            <div class="collapsible-body">
+                                <span>Os rejeitos (contêineres pretos ou cinzas) são recolhidos pela Coleta Pública realizada pela
+                                    Prefeitura Municipal e são destinados ao aterro da cidade. </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/tonelazul.png" style="width:36px;height:36px;"></img>Resíduos Eletroeletrônicos</div>
+                            <div class="collapsible-body">
+                                <span>Ponto de entrega voluntária (PEV) somente para o descarte de eletroeletrônicos SEM PATRIMÔNIO.
+                                        <br>Parceria: Químea Soluções Ambientais
+                                        <br>Locais de entrega: CTISM, Colégio Politécnico, RU I, CT- prédio 07, CCNE - prédio 16ª e CCR - prédio 44
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/especiais.png" style="width:36px;height:36px;">Resíduos Especiais</div>
+                            <div class="collapsible-body">
+                                <span>No sentido de ampliar as alternativas para destinação correta de resíduos tanto gerados pela
+                                    UFSM quanto pela comunidade em geral, foram firmadas parcerias e/ou desenvolvidos projetos
+                                    com instalação PEVs (pontos de entrega voluntária) para: 
+                                </span>
+                                <div>
+                                    <h5>Óleo De Fritura Usado</h5>
+                                    <p>Destinação: fabricação de biodiesel
+                                        <br>Parceria: Fundação M’Oã e Recóleo – Projeto Saúde da Água
+                                        <br>Pontos de entrega:
+                                        <br>CCNE - prédio 13
+                                        <br>CE - prédio 16
+                                        <br>CCS - prédio 26
+                                        <br>CAL - prédio 40
+                                        <br>CCR - prédio 42
+                                        <br>CEFD- prédio 51
+                                        <br>Colégio Politécnico - prédio 70F
+                                        <br>CCSH - prédio 74C
+                                        <br>RU I e RU II
+                                        <br>Reitoria Campus Santa Maria
+                                        <br>HUSM subsolo
+                                        <br>Centro da Cidade de Santa Maria
+                                        <br>Antiga Reitoria
+                                        <br>Prédio de Apoio (abaixo das capelas do HC)
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5>Esponjas De Louça</h5>
+                                    <p>Destinação: produção de madeira plástica
+                                        <br>Parceria: Programa da ONG Terracycle e Scotch Brite
+                                        <br>Não depositar esponjas que entraram em contato com MATERIAIS PERIGOSOS E/OU TÓXICOS.
+                                        <br>Pontos de entrega:                                        
+                                        <br>CCNE - prédio 13
+                                        <br>CE - prédio 16
+                                        <br>CCSH - prédio 74C
+                                        <br>RU I
+                                        <br>Reitoria Campus Santa Maria
+                                        <br>Antiga Reitoria
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5>Banners de Lona</h5>
+                                    <p>Destinação: confecção de bolas, sacolas, carteiras e outros produtos
+                                        <br>Parceria: AAPECAN Santa Maria
+                                        <br>Pontos de entrega:                                        
+                                        <br>Elevador - prédio 16B
+                                        <br>Sala 2220 - prédio 18
+                                        <br>Sala 3224 - prédio 19
+                                        <br>AAPECAN Santa Maria
+                                    </p>
+                                </div>
+                                <div>
+                                    <h5>Logística Reversa</h5>
+                                    <p><b>Tonners e cartuchos de tinta de impressora:</b> devolver ao Almoxarifado Central.
+                                        <br><b>Embalagens plásticas de óleo combustível e lubrificante:</b> deixar no posto de troca mediante comprovante de destinação do óleo e da embalagem.
+                                        <br><b>Lâmpadas fluorescentes:</b> A UFSM NÃO recebe lâmpadas oriundas de particulares. 
+                                        Solicitar recolhimento ao Setor de Elétrica e Eletromecânica – Nilton Irineu B. Rosso. 
+                                        Contato: 3220-8363 ou  99976-5167                                      
+                                    </p>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
                 <div class="divider"></div>
                 <div id="Localizacao" class="section">
                     <h4>Localização dos containers</h4>
-                    <p id="offlineAviso" style="display:none"><b>Atenção: </b>Seu dispositivo está offline, algumas funcionalidades do mapa não estão disponíveis.</p>
+                    <p id="offlineAviso" style="display:none">
+                        <b>Atenção: </b>Seu dispositivo está offline, algumas funcionalidades do mapa não estão disponíveis.</p>
                     <div id="map" style="width:100%; height:400px;"></div>
-                    <div id="formDias" class="z-depth-1" style="background:#fff; margin:10px;padding:10px;">
-                        <form action="#">
-                            <p>
-                                <input type="checkbox" id="segunda" checked="checked"/>
-                                <label for="segunda" class="black-text">Segunda</label>
-                            </p>
-                            <p>
-                                <input type="checkbox" id="terca" checked="checked"/>
-                                <label for="terca" class="black-text">Terça</label>
-                            </p>
-                            <p>
-                                <input type="checkbox" id="quarta" checked="checked"/>
-                                <label for="quarta" class="black-text">Quarta</label>
-                            </p>
-                            <p>
-                                <input type="checkbox" id="quinta" checked="checked"/>
-                                <label for="quinta" class="black-text">Quinta</label>
-                            </p>
-                            <p>
-                                <input type="checkbox" id="sexta" checked="checked"/>
-                                <label for="sexta" class="black-text">Sexta</label>
-                            </p>
-                        </form>
-                    </div>
                 </div>
                 <div class="divider"></div>
                 <div id="QuemFaz" class="section">
                     <h4>Quem faz a coleta?</h4>
-                    <p>A coleta é realizada semanalmente, por quatro associações da cidade, habilitadas em processo público aberto pela UFSM. São elas: Associação de Selecionadores de Materiais Recicláveis (ASMAR), Associação de Materiais Recicláveis Pôr do Sol (ARPS), Associação de Reciclagem de Seletivo Esperança (ARSELE) e Associação Noêmia Lazzarini.</p>
+                    <p>Associação de Selecionadores de Materiais Recicláveis (ASMAR), Associação de Materiais Recicláveis Pôr
+                        do Sol (ARPS), Associação de Reciclagem de Seletivo Esperança (ARSELE) e Associação Noêmia Lazzarini.</p>
+                    <!--div class="carousel">
+                        <a class="carousel-item" href="#one!">
+                            <img src="images/lixeiraverde.png">
+                        </a>
+                        <a class="carousel-item" href="#two!">
+                            <img src="images/lixeiracinza.png">
+                        </a>
+                        <a class="carousel-item" href="#three!">
+                            <img src="images/lixeiramarrom.png">
+                        </a>
+                        <a class="carousel-item" href="#four!">
+                            <img src="images/tonelazul.png">
+                        </a>
+                    </div-->
+                </div>
+                <div id="InfAdicional" class="section">
+                    <h4>Informações Adicionais</h4>
+                    <p>
+                        <a href="http://www.ufsm.br/coletaseletiva">Site da Coleta Seletiva Solidária</a>
+                    </p>
+                    <p>
+                        <a href="http://www.ufsm.br/uma">Site da UMA (Universidade Meio Ambiente)</a>
+                    </p>
+                    <p>Email:
+                        <a href="mailto:uma@ufsm.br">uma@ufsm.br</a>
+                    </p>
+                    <p>
+                        <a href="https://www.facebook.com/UMAUFSM/">Página no Facebook</a>
+                    </p>
                 </div>
             </div>
 

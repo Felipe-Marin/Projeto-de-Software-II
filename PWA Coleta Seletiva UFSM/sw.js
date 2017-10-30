@@ -19,6 +19,10 @@ importScripts('workbox-sw.prod.v2.1.0.js');
  */
 const fileManifest = [
   {
+    "url": "admin.html",
+    "revision": "507da91aa3d2102bfcb2ecb08f5bae28"
+  },
+  {
     "url": "DataTables/DataTables-1.10.15/css/dataTables.bootstrap.css",
     "revision": "46a18cea358250ebca28adcf454a791f"
   },
@@ -247,24 +251,16 @@ const fileManifest = [
     "revision": "1f35e6a11d27d2e10d28946d42332dc5"
   },
   {
-    "url": "images/icons/icon-128x128.png",
-    "revision": "706f9af68c9d8e91838fc0b32b84d218"
+    "url": "images/especiais.png",
+    "revision": "0f80ef631e87765193374177aab7f591"
   },
   {
     "url": "images/icons/icon-144x144.png",
-    "revision": "7cbd1d970060e832b9c66276931d1d26"
-  },
-  {
-    "url": "images/icons/icon-152x152.png",
-    "revision": "4f2335bc19705fc305c564975e8e02ee"
+    "revision": "8c60df7664ed1c1e5300f6c9cbf1447a"
   },
   {
     "url": "images/icons/icon-192x192.png",
-    "revision": "ef27266d834a4bfd9bdc04d4ce7bcf86"
-  },
-  {
-    "url": "images/icons/icon-256x256.png",
-    "revision": "cb33a372107ba4d1a0c2ebe933d659b6"
+    "revision": "97f120e12f907466d19cec233eb44fca"
   },
   {
     "url": "images/lixeiracinza.png",
@@ -279,16 +275,28 @@ const fileManifest = [
     "revision": "c20cf01904a1172f5a8e0e1e3d7ea2b3"
   },
   {
-    "url": "images/mapicon.png",
+    "url": "images/mapicon_eletronico.png",
+    "revision": "161e8815d349bcc2e6868c8cd35bcf9c"
+  },
+  {
+    "url": "images/mapicon_reciclavel.png",
     "revision": "9cf58ce460f79c831729b156d0eac17f"
   },
   {
+    "url": "images/tonelazul.png",
+    "revision": "8d3eafb21a4c5dbb8ea44fc44bc2105a"
+  },
+  {
+    "url": "images/uma.png",
+    "revision": "1753ad873bbd17c8ccedd1d9629014d1"
+  },
+  {
     "url": "index.html",
-    "revision": "0e0b71d4e1370cbbad79ccb679141a28"
+    "revision": "01b1a15a1e32089d2d0616120195a3d7"
   },
   {
     "url": "manifest.json",
-    "revision": "76b52bd4af74397102cd947504e50f14"
+    "revision": "f94d92c6bf3783c23e520f65f31ffabd"
   },
   {
     "url": "scripts/jquery-1.12.4.js",
@@ -320,7 +328,7 @@ const fileManifest = [
   },
   {
     "url": "styles/search.css",
-    "revision": "e80c7e40426740f239fcc9eabe502ccc"
+    "revision": "23c60b42e884171a01620798a04b2081"
   }
 ];
 
