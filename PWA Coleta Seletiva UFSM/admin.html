@@ -13,9 +13,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" charset="utf8" src="scripts/jquery-1.12.4.js"></script>
     <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/admin.js"></script>
     <link rel="manifest" href="/manifest.json">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="728587967360-c832m45n84am52tn76t4n876gomoba55.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email spreadsheets">
+    <meta name="google-signin-client_id" content="APIKEY.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
         function onSignIn(googleUser) {
@@ -30,6 +32,7 @@
 
             // The ID token you need to pass to your backend:
             var id_token = googleUser.getAuthResponse().id_token;
+            token = id_token;
             console.log("ID Token: " + id_token);
             $('#signoutLink').html(profile.getName() + "<a class=\"waves-effect waves-light btn\" onclick=\"signOut();\">Sair</a>");
             $('#signoutLink').show();
@@ -46,7 +49,7 @@
             });
         }
     </script>
-    <script>
+    <!--script>
             var map;
             function initMap() {
                 var center = { lat: -29.714315714425528, lng: -53.71471834680483 };
@@ -56,18 +59,27 @@
                 });
                 var content = '<div>' + 
                     '<h6>Adicionar Contêiner</h6>' +
+                    '<div class="input-field">' +
+                    '<input id="inputNome" type="text">' +
+                    '<label for="inputNome">Nome</label>' +
+                    '</div>' +
                     '<img id="buttonLixeiraVerde" src="images/lixeiraverde.png" class="z-depth-1" style="width:30px;heigth:30px;margin-left:2px;"></img>' +
                     '<img id="buttonTonelAzul" src="images/tonelazul.png" class="z-depth-1" style="width:30px;heigth:30px;margin-left:2px;"></img>' +
                     '</div>';
-                var infowindow = new google.maps.InfoWindow({content:content});
+                var infowindow = false;
                 map.addListener('click', function(e){
+                    if(infowindow){
+                        infowindow.close();
+                    }
+                    infowindow = new google.maps.InfoWindow({content:content});
                     infowindow.setPosition(e.latLng);
                     infowindow.open(map);
                     $('#buttonLixeiraVerde').click(function(){
+                        var icon = 'images/mapicon_reciclavel.png';
                         var marker = new google.maps.Marker({
                             position: e.latLng,
                             map: map,
-                            title: row[0],
+                            title: $('#inputNome').val(),
                             icon: icon
                         });
                     });
@@ -101,7 +113,7 @@
                     }
                 });
             }
-    </script>
+    </script-->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6QEqPesjp59dV_Iqa0T56y_NcnTMSbjw&callback=initMap"></script>
     <script>
 
