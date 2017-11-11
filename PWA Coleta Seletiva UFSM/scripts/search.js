@@ -9,12 +9,12 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (data) {
             searchTable = $('#table1').DataTable({
-                "responsive": true,
-                "dom": 'tp',
-                "data": data.feed.entry,
-                "columns": [
-                    { "data": "gsx$residuo.$t" },
-                    { "data": "gsx$tipo.$t" }
+                'responsive': true,
+                'dom': 'tp',
+                'data': data.feed.entry,
+                'columns': [
+                    { 'data': 'gsx$residuo.$t' },
+                    { 'data': 'gsx$tipo.$t' }
                 ]
             });
         }

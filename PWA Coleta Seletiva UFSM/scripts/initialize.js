@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
 }
 
 $(document).ready(function () {
-    $(".button-collapse").sideNav();
+    $('.button-collapse').sideNav();
     $('.collapsible').collapsible();
     $('.carousel').carousel();
     $('#results').hide();

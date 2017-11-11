@@ -4,10 +4,10 @@ $(document).ready(function () {
         $('#offlineAviso').show();
     }
 });
-window.addEventListener("offline", function () {
+window.addEventListener('offline', function () {
     $('#offlineAviso').show();
 });
-window.addEventListener("online", function () {
+window.addEventListener('online', function () {
     $('#offlineAviso').hide();
 });
 
@@ -17,7 +17,6 @@ function initMap() {
         zoom: 15,
         center: center
     });
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('formDias'));
     var data = {};
     $.ajax({
         url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/2/public/values?alt=json',
@@ -28,12 +27,12 @@ function initMap() {
             $.each(data.feed.entry, function (index, item) {
                 var icon;
                 if (item.gsx$tipo.$t == 'reciclavel') {
-                    icon = 'images/mapicon_reciclavel.png'
+                    icon = 'images/mapicon_reciclavel.png';
                 }
                 else {
-                    icon = 'images/mapicon_eletronico.png'
+                    icon = 'images/mapicon_eletronico.png';
                 }
-                var marker = new google.maps.Marker({
+                new google.maps.Marker({
                     position: { lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t) },
                     map: map,
                     title: item.gsx$nome.$t,
