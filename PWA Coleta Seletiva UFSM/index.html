@@ -13,99 +13,13 @@
     <link rel="stylesheet" type="text/css" href="styles/search.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" charset="utf8" src="scripts/jquery-1.12.4.js"></script>
-    <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
     <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
-    <script type="text/javascript">
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('./sw.js')
-                .then(function () { console.log('Service Worker Registered'); });
-        }
-        var searchTable;
-        var dataResiduos = {};
-        $(document).ready(function () {
-            $(".button-collapse").sideNav();
-            $('.collapsible').collapsible();
-            $('.carousel').carousel();
-            $('#results').hide();
-            $.ajax({
-                url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/od6/public/values?alt=json',
-                cache: true,
-                data: dataResiduos,
-                dataType: 'json',
-                success: function (data) {
-                    searchTable = $('#table1').DataTable({
-                        "responsive": true,
-                        "dom": 'tp',
-                        "data": data.feed.entry,
-                        "columns": [
-                            { "data": "gsx$residuo.$t" },
-                            { "data": "gsx$tipo.$t" }
-                        ]
-                    });
-                }
-            });
-            $('#search').keyup(function () {
-                if ($('#search').val() == '') {
-                    $('#results').hide();
-                }
-                else {
-                    $('#results').show();
-                    searchTable.search($(this).val()).draw();
-                }
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            if (!navigator.onLine) {
-                $('#offlineAviso').show();
-            }
-        });
-        window.addEventListener("offline", function () {
-            $('#offlineAviso').show();
-        });
-        window.addEventListener("online", function () {
-            $('#offlineAviso').hide();
-        });
-    </script>
-    <script>
-        function initMap() {
-            var center = { lat: -29.714315714425528, lng: -53.71471834680483 };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: center
-            });
-            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('formDias'));
-            var data = {};
-            $.ajax({
-                url: 'https://spreadsheets.google.com/feeds/list/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/2/public/values?alt=json',
-                cache: true,
-                data: data,
-                dataType: 'json',
-                success: function (data) {
-                    $.each(data.feed.entry, function (index, item) {
-                        var icon;
-                        if (item.gsx$tipo.$t == 'reciclavel') {
-                            icon = 'images/mapicon_reciclavel.png'
-                        }
-                        else {
-                            icon = 'images/mapicon_eletronico.png'
-                        }
-                        var marker = new google.maps.Marker({
-                            position: { lat: parseFloat(item.gsx$latitude.$t), lng: parseFloat(item.gsx$longitude.$t) },
-                            map: map,
-                            title: item.gsx$nome.$t,
-                            icon: icon
-                        });
-                    });
-                }
-            });
-        }
-    </script>
+    <script type="text/javascript" charset="utf8" src="scripts/initialize.js"></script>
+    <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/search.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/map.js"></script> 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6QEqPesjp59dV_Iqa0T56y_NcnTMSbjw&callback=initMap"></script>
     <link rel="manifest" href="/manifest.json">
-
 </head>
 
 <body>
