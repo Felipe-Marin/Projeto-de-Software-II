@@ -7,6 +7,7 @@ if ('serviceWorker' in navigator) {
 $(document).ready(function () {
     $('.button-collapse').sideNav();
     $('.collapsible').collapsible();
+    $('.scrollspy').scrollSpy();
     $('.carousel').carousel();
     $('#results').hide();
     

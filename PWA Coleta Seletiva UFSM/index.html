@@ -44,11 +44,10 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col s12 l4 offset-l4"><img src="images/uma.png" class="responsive-img"></div>
-            
+            <div class="col s12 l4 offset-l4"><img src="images/uma.png" class="responsive-img"></div>  
         </div>
         <div class="row">
-            <div class="col s12">
+            <div class="col s12 m9 l10">
                 <div class="search-wrapper card">
                     <input id="search" placeholder="Buscar resíduos">
                     <i class="material-icons">search</i>
@@ -63,7 +62,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="section">
+                <div id="oqueSection" class="section scrollspy">
                     <h4>O que é a Coleta Seletiva Solidária UFSM?</h4>
                     <p>É a coleta dos resíduos recicláveis gerados na UFSM em cumprimento ao Decreto nº 5.940/2006 e tem como
                         parceiros as Associações de Selecionadores de Santa Maria.</p>
@@ -71,13 +70,13 @@
                     <p>Pontos de recolhimento no campus: 60</p>
                     <p>Responsáveis pela gestão: Setor de Planejamento Ambiental e COMPLANA.</p>
                 </div>
-                <div class="section">
+                <div id="comoSection" class="section scrollspy">
                     <h4>Como funciona a coleta?</h4>
                     <p>A coleta ocorre todas às segundas, quartas e quintas-feiras, a partir das 8 h, exceto nos feriados.</p>
                     <p>Cada Associação é responsável pela coleta durante uma semana havendo rodízio ao longo do ano.</p>
                     <p><a href="http://coral.ufsm.br/coletaseletiva/">Veja aqui</a> rota e calendário da coleta seletiva.</p>
                 </div>
-                <div class="section">
+                <div id="recolheSection" class="section scrollspy">
                     <h4>O que a coleta seletiva recolhe?</h4>
                     <ul class="collapsible popout" data-collapsible="accordion">
                         <li>
@@ -183,14 +182,14 @@
                     </ul>
                 </div>
                 <div class="divider"></div>
-                <div id="Localizacao" class="section">
+                <div id="ondeSection" class="section scrollspy">
                     <h4>Localização dos containers</h4>
                     <p id="offlineAviso" style="display:none">
                         <b>Atenção: </b>Seu dispositivo está offline, algumas funcionalidades do mapa não estão disponíveis.</p>
                     <div id="map" style="width:100%; height:400px;"></div>
                 </div>
                 <div class="divider"></div>
-                <div id="QuemFaz" class="section">
+                <div id="quemSection" class="section scrollspy">
                     <h4>Quem faz a coleta?</h4>
                     <p>Associação de Selecionadores de Materiais Recicláveis (ASMAR), Associação de Materiais Recicláveis Pôr
                         do Sol (ARPS), Associação de Reciclagem de Seletivo Esperança (ARSELE) e Associação Noêmia Lazzarini.</p>
@@ -209,7 +208,7 @@
                         </a>
                     </div-->
                 </div>
-                <div id="InfAdicional" class="section">
+                <div id="infoSection" class="section scrollspy">
                     <h4>Informações Adicionais</h4>
                     <p>
                         <a href="http://www.ufsm.br/coletaseletiva">Site da Coleta Seletiva Solidária</a>
@@ -225,7 +224,16 @@
                     </p>
                 </div>
             </div>
-
+            <div class="col hide-on-small-only m3 l2">
+                <ul class="section table-of-contents">
+                    <li><a href="#oqueSection">O que é?</a></li>
+                    <li><a href="#comoSection">Como funciona?</a></li>
+                    <li><a href="#recolheSection">O que recolhe?</a></li>
+                    <li><a href="#ondeSection">Onde estão os containers?</a></li>
+                    <li><a href="#quemSection">Quem faz a coleta?</a></li>
+                    <li><a href="#infoSection">Informações adicionais</a></li>
+                </ul>
+            </div>
         </div>
 
     </div>
