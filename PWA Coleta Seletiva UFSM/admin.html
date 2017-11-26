@@ -6,118 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#33691e">
-    <title>Coleta Seletiva Solidária UFSM</title>
+    <title>Coleta Seletiva Solidária UFSM - Editor</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="styles/materialize.css">
-    <link rel="stylesheet" type="text/css" href="styles/search.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" charset="utf8" src="scripts/jquery-1.12.4.js"></script>
     <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/client:api.js"></script>
     <script type="text/javascript" charset="utf8" src="scripts/admin.js"></script>
     <link rel="manifest" href="/manifest.json">
-    <meta name="google-signin-scope" content="profile email spreadsheets">
-    <meta name="google-signin-client_id" content="APIKEY.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email https://www.googleapis.com/auth/spreadsheets">
+    <meta name="google-signin-client_id" content="APIKEY">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script>
-        function onSignIn(googleUser) {
-            // Useful data for your client-side scripts:
-            var profile = googleUser.getBasicProfile();
-            console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-            console.log('Full Name: ' + profile.getName());
-            console.log('Given Name: ' + profile.getGivenName());
-            console.log('Family Name: ' + profile.getFamilyName());
-            console.log("Image URL: " + profile.getImageUrl());
-            console.log("Email: " + profile.getEmail());
-
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-            token = id_token;
-            console.log("ID Token: " + id_token);
-            $('#signoutLink').html(profile.getName() + "<a class=\"waves-effect waves-light btn\" onclick=\"signOut();\">Sair</a>");
-            $('#signoutLink').show();
-            getSheet();
-        };
-    </script>
-    <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-                $('#signoutLink').html("");
-                $('#signoutLink').hide();
-            });
-        }
-    </script>
-    <!--script>
-            var map;
-            function initMap() {
-                var center = { lat: -29.714315714425528, lng: -53.71471834680483 };
-                map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
-                    center: center
-                });
-                var content = '<div>' + 
-                    '<h6>Adicionar Contêiner</h6>' +
-                    '<div class="input-field">' +
-                    '<input id="inputNome" type="text">' +
-                    '<label for="inputNome">Nome</label>' +
-                    '</div>' +
-                    '<img id="buttonLixeiraVerde" src="images/lixeiraverde.png" class="z-depth-1" style="width:30px;heigth:30px;margin-left:2px;"></img>' +
-                    '<img id="buttonTonelAzul" src="images/tonelazul.png" class="z-depth-1" style="width:30px;heigth:30px;margin-left:2px;"></img>' +
-                    '</div>';
-                var infowindow = false;
-                map.addListener('click', function(e){
-                    if(infowindow){
-                        infowindow.close();
-                    }
-                    infowindow = new google.maps.InfoWindow({content:content});
-                    infowindow.setPosition(e.latLng);
-                    infowindow.open(map);
-                    $('#buttonLixeiraVerde').click(function(){
-                        var icon = 'images/mapicon_reciclavel.png';
-                        var marker = new google.maps.Marker({
-                            position: e.latLng,
-                            map: map,
-                            title: $('#inputNome').val(),
-                            icon: icon
-                        });
-                    });
-                });
-                $
-
-            }
-            function getSheet() {
-                var data = {};
-                $.ajax({
-                    url: 'https://sheets.googleapis.com/v4/spreadsheets/1CNFUNPva91WPsoD2Yr0n3KQ4BjZcNkBRFhsYub1ClpA/values/Coletores!A2:D1000?key=APIKEY',
-                    data: data,
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data.values);
-                        $.each(data.values, function (index, row) {
-                            var icon;
-                            if (row[3] == 'reciclavel') {
-                                icon = 'images/mapicon_reciclavel.png'
-                            }
-                            else {
-                                icon = 'images/mapicon_eletronico.png'
-                            }
-                            var marker = new google.maps.Marker({
-                                position: { lat: parseFloat(row[1]), lng: parseFloat(row[2]) },
-                                map: map,
-                                title: row[0],
-                                icon: icon
-                            });
-                        });
-                    }
-                });
-            }
-    </script-->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6QEqPesjp59dV_Iqa0T56y_NcnTMSbjw&callback=initMap"></script>
-    <script>
+    <style>
+        .g-signin2 {
+            width: 100%
+        }
 
-    </script>
+        .g-signin2>div {
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -134,17 +44,53 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col s12 m12 l6">
-                <h4>Planilha</h4>
-                <p>Escolha uma planilha para salvar os locais de coleta.</p>
-                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-                <div id="planilhas">
-
+            <div class="col s12">
+                <div id="loginDiv" class="center-align">
+                    <p>Faça login para editar os locais de coleta.</p>
+                    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                </div>
+                <div id="locais">
+                    <h4>Locais de Coleta</h4>
+                    <div id="map" style="width:100%; height:500px;"></div>
+                    <div class="center-align" style="margin-top:30px;">
+                        <a class="teal darken-4 waves-effect waves-light btn" onclick="updateSheet()">
+                            <i class="material-icons left">save</i>salvar</a>
+                    </div>
                 </div>
             </div>
-            <div class="col s12 m12 l6">
-                <h4>Locais de Coleta</h4>
-                <div id="map" style="width:100%; height:400px;"></div>
+        </div>
+    </div>
+    <div id="modalAt" class="modal">
+        <div id="modalCont" class="modal-content center-align">
+            <h5>Atualizando planilha, aguarde...</h5>
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalSuccess" class="modal">
+        <div id="modalCont" class="modal-content center-align">
+            <h5>Planilha atualizada com sucesso.</h5>
+            <div class="modal-footer" style="text-align:center;">
+                <a href="#!" class="teal darken-4 modal-action modal-close waves-effect waves-green btn">OK</a>
+            </div>
+        </div>
+    </div>
+    <div id="modalFail" class="modal">
+        <div id="modalCont" class="modal-content center-align">
+            <h5>Erro na atualização da planilha.</h5>
+            <div class="modal-footer" style="text-align:center;">
+                <a href="#!" class="teal darken-4 modal-action modal-close waves-effect waves-green btn">OK</a>
             </div>
         </div>
     </div>
