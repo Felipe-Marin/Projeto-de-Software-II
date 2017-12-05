@@ -107,20 +107,25 @@ function newMarker(map, lat, lng, title, tipo){
     marker.set('tipo', tipo);
     marker.set('id', markers.length);
     var content = '<div>' + 
-    '<h6>Modificar Contêiner</h6>' +
-    '<div class="input-field">' +
-    '<input id="inputNome" type="text">' +
+    '<h6>Editar Contêiner</h6>' +
+    '<div id="removeText" style="display:none;"><h5>Tem certeza que deseja remover o contêiner do mapa?</h5></div>' +
+    '<div id="nomeDiv" class="input-field">' +
+    '<input disabled id="inputNome" type="text">' +
     '<label for="inputNome">Nome</label>' +
     '</div>' +
-    '<div class="input-field">' +
-    '<select name="tipoRes" id="tipoRes">' +
+    '<div id="tipoDiv" class="input-field">' +
+    '<select disabled name="tipoRes" id="tipoRes">' +
     '<option value="reciclavel" data-icon="images/lixeiraverde.png" class"left">Resíduo reciclável</option>' +
     '<option value="eletronico" data-icon="images/tonelazul.png" class"left">Resíduo eletrônico</option>' +
     '</select>' +
     '</div>' +
     '<div class="center-align">' +
-    '<a id="btnModCont" class="teal darken-4 waves-effect waves-light btn" style="margin-right:2px;"><i class="material-icons left">edit</i>Modificar</a>' +
+    '<a id="btnModCont" class="teal darken-4 waves-effect waves-light btn" style="margin-right:2px;"><i class="material-icons left">edit</i>Editar</a>' +
+    '<a id="btnConfEdit" class="teal darken-4 waves-effect waves-light btn" style="display:none;margin-right:2px;">Salvar</a>' +
+    '<a id="btnCancEdit" class="teal darken-4 waves-effect waves-light btn" style="display:none;margin-right:2px;">Cancelar</a>' +
     '<a id="btnRemCont" class="teal darken-4 waves-effect waves-light btn"><i class="material-icons left">delete</i>Remover</a>' +
+    '<a id="btnConfRem" class="teal darken-4 waves-effect waves-light btn" style="display:none;margin-right:2px;">Sim</a>' +
+    '<a id="btnCancRem" class="teal darken-4 waves-effect waves-light btn" style="display:none;margin-right:2px;">Cancelar</a>' +
     '</div>' +
     '</div>';
     var infowindow = new google.maps.InfoWindow({
@@ -133,15 +138,66 @@ function newMarker(map, lat, lng, title, tipo){
         $('#tipoRes').val(marker.get('tipo'));
         $('#tipoRes').material_select();
         $('#btnModCont').click(function(){
+            $('#inputNome').prop('disabled', false);
+            $('#tipoRes').prop('disabled', false).siblings().prop('disabled', false);
+            $('#tipoRes').material_select();
+            $('#btnModCont').hide();
+            $('#btnRemCont').hide();
+            $('#btnConfEdit').show();
+            $('#btnCancEdit').show();
+        });
+        $('#btnConfEdit').click(function(){
             console.log('Modificar: ' + marker.get('id'));
+            $('#inputNome').prop('disabled', true);
+            $('#tipoRes').prop('disabled', true).siblings().prop('disabled', true);;
+            $('#btnModCont').show();
+            $('#btnRemCont').show();
+            $('#btnConfEdit').hide();
+            $('#btnCancEdit').hide();
             marker.setTitle($('#inputNome').val());
             marker.set('tipo', $('#tipoRes').val());
             marker.setIcon(getIcon($('#tipoRes').val()));
+            Materialize.toast('Contêiner modificado!', 10000);
+        });
+        $('#btnCancEdit').click(function(){
+            console.log('Modificar: ' + marker.get('id'));
+            $('#inputNome').prop('disabled', true);
+            $('#tipoRes').prop('disabled', true).siblings().prop('disabled', true);
+            $('#btnModCont').show();
+            $('#btnRemCont').show();
+            $('#btnConfEdit').hide();
+            $('#btnCancEdit').hide();
         });
         var cancel = false;
         $('#btnRemCont').click(function(){
+            $('#nomeDiv').hide();
+            $('#tipoDiv').hide();
+            $('#removeText').show();
+            $('#btnRemCont').hide();
+            $('#btnModCont').hide();
+            $('#btnConfRem').show();
+            $('#btnCancRem').show();
+        });
+        $('#btnConfRem').click(function(){
             console.log('Remover: ' + marker.get('id'));
+            $('#nomeDiv').show();
+            $('#tipoDiv').show();
+            $('#removeText').hide();
+            $('#btnRemCont').show();
+            $('#btnModCont').show();
+            $('#btnConfRem').hide();
+            $('#btnCancRem').hide();
             removeMarker(marker.get('id'));
+            Materialize.toast('Contêiner removido!', 10000);
+        });
+        $('#btnCancRem').click(function(){
+            $('#nomeDiv').show();
+            $('#tipoDiv').show();
+            $('#removeText').hide();
+            $('#btnRemCont').show();
+            $('#btnModCont').show();
+            $('#btnConfRem').hide();
+            $('#btnCancRem').hide();
         });
     });
     return marker;
