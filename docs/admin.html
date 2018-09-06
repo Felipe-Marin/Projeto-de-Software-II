@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#33691e">
+    <title>Coleta Seletiva Solidária UFSM - Editor</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="styles/materialize.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" charset="utf8" src="scripts/jquery-1.12.4.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
+    <script src="https://apis.google.com/js/client:api.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/admin.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="google-signin-scope" content="profile email https://www.googleapis.com/auth/spreadsheets">
+    <meta name="google-signin-client_id" content="728587967360-c832m45n84am52tn76t4n876gomoba55.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6QEqPesjp59dV_Iqa0T56y_NcnTMSbjw&callback=initMap"></script>
+    <style>
+        .g-signin2 {
+            width: 100%
+        }
+
+        .g-signin2>div {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper light-green darken-4">
+                <a href="#" class="brand-logo hide-on-med-and-down">Coleta Seletiva UFSM</a>
+                <a href="#" class="hide-on-large-only center-align" style="font-size:25px">Coleta Seletiva UFSM</a>
+                <ul class="right hide-on-med-and-down">
+                    <li id="signoutLink" style="display:none;"></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div id="loginDiv" class="center-align">
+                    <p>Faça login para editar os locais de coleta.</p>
+                    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                </div>
+                <div id="locais">
+                    <h4>Locais de Coleta</h4>
+                    <div id="map" style="width:100%; height:500px;"></div>
+                    <div class="center-align" style="margin-top:30px;">
+                        <a class="teal darken-4 waves-effect waves-light btn" onclick="updateSheet()">
+                            <i class="material-icons left">save</i>Exportar para planilha</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalAt" class="modal">
+        <div id="modalCont" class="modal-content center-align">
+            <h5>Atualizando planilha, aguarde...</h5>
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalSuccess" class="modal">
+        <div id="modalCont" class="modal-content center-align">
+            <h5>Planilha atualizada com sucesso.</h5>
+            <div class="modal-footer" style="text-align:center;">
+                <a href="#!" class="teal darken-4 modal-action modal-close waves-effect waves-green btn">OK</a>
+            </div>
+        </div>
+    </div>
+    <div id="modalFail" class="modal">
+        <div id="modalCont" class="modal-content center-align">
+            <h5>Erro na atualização da planilha.</h5>
+            <div class="modal-footer" style="text-align:center;">
+                <a href="#!" class="teal darken-4 modal-action modal-close waves-effect waves-green btn">OK</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

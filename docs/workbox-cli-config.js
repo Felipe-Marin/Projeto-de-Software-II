@@ -6,14 +6,16 @@ module.exports = {
   "runtimeCaching": [
     {
       urlPattern: 'https://spreadsheets.google.com/*',
-      handler: 'cacheFirst'
+      handler: 'networkFirst'
     }
   ],
   "swDest": "sw.js",
   "globIgnores": [
     "workbox-cli-config.js",
     "node_modules/**/*",
+	".git/**/*",
     ".eslintrc.js",
-    "admin.html"
+    "admin.html",
+	"scripts/admin.js"
   ]
 };

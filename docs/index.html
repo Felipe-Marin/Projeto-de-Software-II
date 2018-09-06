@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#33691e">
+    <title>Coleta Seletiva Solidária UFSM</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.css">
+    <link rel="stylesheet" type="text/css" href="styles/materialize.css">
+    <link rel="stylesheet" type="text/css" href="styles/search.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" charset="utf8" src="scripts/jquery-1.12.4.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/materialize.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/initialize.js"></script>
+    <script type="text/javascript" charset="utf8" src="DataTables/datatables.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/search.js"></script>
+    <script type="text/javascript" charset="utf8" src="scripts/map.js"></script> 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6QEqPesjp59dV_Iqa0T56y_NcnTMSbjw&callback=initMap"></script>
+    <link rel="manifest" href="/manifest.json">
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper light-green darken-4">
+                <a href="#" class="brand-logo hide-on-med-and-down">Coleta Seletiva UFSM</a>
+                <a href="#" class="hide-on-large-only center-align" style="font-size:25px">Coleta Seletiva UFSM</a>
+                <!--a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#Localizacao">Localização dos containers</a></li>
+                    <li><a href="#QuemFaz">Quem faz a coleta?</a></li>
+                    <li><a href="link.html">Link 3</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    <li><a href="#Localizacao">Localização dos containers</a></li>
+                    <li><a href="#QuemFaz">Quem faz a coleta?</a></li>
+                    <li><a href="link.html">Link 3</a></li>
+                </ul-->
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 l4 offset-l4"><img src="images/uma.png" class="responsive-img"></div>  
+        </div>
+        <div class="row">
+            <div class="col s12 m9 l10">
+                <div class="search-wrapper card">
+                    <input id="search" placeholder="Buscar resíduos">
+                    <i class="material-icons">search</i>
+                </div>
+                <div id="results">
+                    <table class="display" id="table1" style="width:90%">
+                        <thead>
+                            <tr>
+                                <th title="residuo">Resíduo</th>
+                                <th title="tipo">Tipo</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div id="oqueSection" class="section scrollspy">
+                    <h4>O que é a Coleta Seletiva Solidária UFSM?</h4>
+                    <p>É a coleta dos resíduos recicláveis gerados na UFSM em cumprimento ao Decreto nº 5.940/2006 e tem como
+                        parceiros as Associações de Selecionadores de Santa Maria.</p>
+                    <p>Início das atividades: 6 de junho de 2016.</p>
+                    <p>Pontos de recolhimento no campus: 60</p>
+                    <p>Responsáveis pela gestão: Setor de Planejamento Ambiental e COMPLANA.</p>
+                </div>
+                <div id="comoSection" class="section scrollspy">
+                    <h4>Como funciona a coleta?</h4>
+                    <p>A coleta ocorre todas às segundas, quartas e quintas-feiras, a partir das 8 h, exceto nos feriados.</p>
+                    <p>Cada Associação é responsável pela coleta durante uma semana havendo rodízio ao longo do ano.</p>
+                    <p><a href="http://coral.ufsm.br/coletaseletiva/">Veja aqui</a> rota e calendário da coleta seletiva.</p>
+                </div>
+                <div id="recolheSection" class="section scrollspy">
+                    <h4>O que a coleta seletiva recolhe?</h4>
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/lixeiraverde.png" style="width:36px;height:36px;"></img>Resíduos Recicláveis</div>
+                            <div class="collapsible-body">
+                                <span>Os resíduos recicláveis (contêineres verdes) são papéis/papelão, metais, vidros e plásticos.
+                                    Esses resíduos são recolhidos semanalmente e destinados às Associações de Selecionadores.
+                                    Cabe às Associações realizar a triagem, armazenamento e venda dos materiais. </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/lixeiramarrom.png" style="width:36px;height:36px;"></img>Resíduos Orgânicos</div>
+                            <div class="collapsible-body">
+                                <span>Os resíduos orgânicos são coletados diariamente nos restaurantes e lancherias e enviados
+                                    à unidade de compostagem do Colégio Politécnico da UFSM.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/lixeiracinza.png" style="width:36px;height:36px;"></img>Rejeitos</div>
+                            <div class="collapsible-body">
+                                <span>Os rejeitos (contêineres pretos ou cinzas) são recolhidos pela coleta pública realizada pela
+                                    Prefeitura Municipal e destinados ao aterro sanitário do município. </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/tonelazul.png" style="width:36px;height:36px;"></img>Resíduos Eletroeletrônicos</div>
+                            <div class="collapsible-body">
+                                <span>Ponto de entrega voluntária (PEV) somente para o descarte de eletroeletrônicos SEM PATRIMÔNIO.
+                                        <br>Parceria: Químea Soluções Ambientais
+                                        <br>Locais de entrega: CTISM, Colégio Politécnico, RU I, CT- hall prédio 07, CCNE - prédio 16A e CCR - hall prédio 44
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header">
+                                <img src="images/tonelverde.png" style="width:36px;height:36px;">Resíduos Especiais</div>
+                            <div class="collapsible-body">
+                                <span>No sentido de ampliar as alternativas para destinação correta de resíduos gerados pela
+                                    UFSM quanto pela comunidade em geral, foram firmadas parcerias e/ou desenvolvidos projetos
+                                    com instalação de PEVs (pontos de entrega voluntária) para: 
+                                </span>
+                                <div class="row">
+                                    <div class="col s12">
+                                      <ul class="tabs">
+                                        <li class="tab col s3"><a class="active" href="#especiaisTab1">Óleo de Fritura Usado</a></li>
+                                        <li class="tab col s3"><a href="#especiaisTab2">Esponjas De Louça</a></li>
+                                        <li class="tab col s3"><a href="#especiaisTab3">Banners de Lona</a></li>
+                                        <li class="tab col s3"><a href="#especiaisTab4">Logística Reversa</a></li>
+                                      </ul>
+                                    </div>
+                                    <div id="especiaisTab1" class="col s12"><h5>Óleo De Fritura Usado</h5>
+                                        <p>Destinação: fabricação de biodiesel
+                                            <br>Parceria: Fundação M’Oã e Recóleo – Projeto Saúde da Água
+                                            <br>Pontos de entrega:
+                                            <br>CCNE - prédio 13
+                                            <br>CE - prédio 16
+                                            <br>CCS - prédio 26
+                                            <br>CAL - prédio 40
+                                            <br>CCR - prédio 42
+                                            <br>CEFD- prédio 51
+                                            <br>Colégio Politécnico - prédio 70F
+                                            <br>CCSH - prédio 74C
+                                            <br>RU I e RU II
+                                            <br>Reitoria Campus Santa Maria
+                                            <br>HUSM subsolo
+                                            <br>Centro da Cidade de Santa Maria
+                                            <br>Antiga Reitoria
+                                            <br>Prédio de Apoio (abaixo das capelas do HC)
+                                        </p></div>
+                                    <div id="especiaisTab2" class="col s12"><h5>Esponjas De Louça</h5>
+                                        <p>Destinação: produção de madeira plástica
+                                            <br>Parceria: Programa da ONG Terracycle e Scotch Brite
+                                            <br>Não depositar esponjas que entraram em contato com MATERIAIS PERIGOSOS E/OU TÓXICOS.
+                                            <br>Pontos de entrega:                                        
+                                            <br>CCNE - prédio 13
+                                            <br>CE - prédio 16
+                                            <br>CCSH - prédio 74C
+                                            <br>RU I
+                                            <br>Reitoria Campus Santa Maria
+                                            <br>Antiga Reitoria
+                                        </p></div>
+                                    <div id="especiaisTab3" class="col s12"><h5>Banners de Lona</h5>
+                                        <p>Destinação: confecção de bolas, sacolas, carteiras e outros produtos
+                                            <br>Parceria: AAPECAN Santa Maria
+                                            <br>Pontos de entrega:                                        
+                                            <br>Elevador - prédio 16B
+                                            <br>Sala 2220 - prédio 18
+                                            <br>Sala 3224 - prédio 19
+                                            <br>AAPECAN Santa Maria
+                                        </p></div>
+                                    <div id="especiaisTab4" class="col s12"><h5>Logística Reversa</h5>
+                                        <p><b>Tonners e cartuchos de tinta de impressora:</b> devolver ao Almoxarifado Central.
+                                            <br><b>Embalagens plásticas de óleo combustível e lubrificante:</b> deixar no posto de troca mediante comprovante de destinação do óleo e da embalagem.
+                                            <br><b>Lâmpadas fluorescentes:</b> A UFSM NÃO recebe lâmpadas oriundas de particulares. 
+                                            Solicitar recolhimento ao Setor de Elétrica e Eletromecânica – Nilton Irineu B. Rosso. 
+                                            Contato: 3220-8363 ou  99976-5167                                      
+                                        </p></div>
+                                </div>    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="divider"></div>
+                <div id="ondeSection" class="section scrollspy">
+                    <h4>Onde há um contêiner perto de você?</h4>
+                    <p id="offlineAviso" style="display:none">
+                        <b>Atenção: </b>Seu dispositivo está offline, algumas funcionalidades do mapa não estão disponíveis.</p>
+                    <div id="map" style="width:100%; height:400px;"></div>
+                </div>
+                <div class="divider"></div>
+                <div id="quemSection" class="section scrollspy">
+                    <h4>Quem faz a coleta?</h4>
+                    <p>Associação de Selecionadores de Materiais Recicláveis (ASMAR), Associação de Materiais Recicláveis Pôr
+                        do Sol (ARPS), Associação de Reciclagem de Seletivo Esperança (ARSELE) e Associação Noêmia Lazzarini.</p>
+                    <!--div class="carousel">
+                        <a class="carousel-item" href="#one!">
+                            <img src="images/lixeiraverde.png">
+                        </a>
+                        <a class="carousel-item" href="#two!">
+                            <img src="images/lixeiracinza.png">
+                        </a>
+                        <a class="carousel-item" href="#three!">
+                            <img src="images/lixeiramarrom.png">
+                        </a>
+                        <a class="carousel-item" href="#four!">
+                            <img src="images/tonelazul.png">
+                        </a>
+                    </div-->
+                </div>
+                <div id="infoSection" class="section scrollspy">
+                    <h4>Informações Adicionais</h4>
+                    <p>
+                        <a href="http://www.ufsm.br/coletaseletiva">Site da Coleta Seletiva Solidária</a>
+                    </p>
+                    <p>
+                        <a href="http://www.ufsm.br/uma">Site da UMA (Universidade Meio Ambiente)</a>
+                    </p>
+                    <p>Email:
+                        <a href="mailto:uma@ufsm.br">uma@ufsm.br</a>
+                    </p>
+                    <p>
+                        <a href="https://www.facebook.com/UMAUFSM/">Página no Facebook</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col hide-on-small-only m3 l2">
+                <ul class="section table-of-contents">
+                    <li><a href="#oqueSection">O que é?</a></li>
+                    <li><a href="#comoSection">Como funciona?</a></li>
+                    <li><a href="#recolheSection">O que recolhe?</a></li>
+                    <li><a href="#ondeSection">Onde estão os contêineres?</a></li>
+                    <li><a href="#quemSection">Quem faz a coleta?</a></li>
+                    <li><a href="#infoSection">Informações adicionais</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+
+</html>

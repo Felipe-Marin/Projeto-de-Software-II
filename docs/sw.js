@@ -1,4 +1,4 @@
-importScripts('workbox-sw.prod.v2.1.0.js');
+importScripts('workbox-sw.prod.v2.1.2.js');
 
 /**
  * DO NOT EDIT THE FILE MANIFEST ENTRY
@@ -247,24 +247,28 @@ const fileManifest = [
     "revision": "1f35e6a11d27d2e10d28946d42332dc5"
   },
   {
-    "url": "images/icons/icon-128x128.png",
-    "revision": "706f9af68c9d8e91838fc0b32b84d218"
+    "url": "images/chrome1.png",
+    "revision": "f74abab4e22116ba54db980900e88126"
+  },
+  {
+    "url": "images/chrome2.png",
+    "revision": "9b47c5fbc2f85ebe0a78a3d0202db4bc"
+  },
+  {
+    "url": "images/firefox1.png",
+    "revision": "b5b1cb748b9537a62cf02e05f0fce383"
+  },
+  {
+    "url": "images/firefox2.png",
+    "revision": "0c45914097b6dbb7d10278154e14bf2c"
   },
   {
     "url": "images/icons/icon-144x144.png",
     "revision": "8c60df7664ed1c1e5300f6c9cbf1447a"
   },
   {
-    "url": "images/icons/icon-152x152.png",
-    "revision": "4f2335bc19705fc305c564975e8e02ee"
-  },
-  {
     "url": "images/icons/icon-192x192.png",
     "revision": "97f120e12f907466d19cec233eb44fca"
-  },
-  {
-    "url": "images/icons/icon-256x256.png",
-    "revision": "cb33a372107ba4d1a0c2ebe933d659b6"
   },
   {
     "url": "images/icons/icon-512x512.png",
@@ -311,10 +315,6 @@ const fileManifest = [
     "revision": "6b1f5c36f1ba36a760a9c42c4c0b5296"
   },
   {
-    "url": "scripts/admin.js",
-    "revision": "543bc6f4286cf169c8aedc6c5ec66fec"
-  },
-  {
     "url": "scripts/initialize.js",
     "revision": "dd804d856268b83c3a93d5abe2081e4b"
   },
@@ -357,9 +357,13 @@ const fileManifest = [
   {
     "url": "styles/search.css",
     "revision": "23c60b42e884171a01620798a04b2081"
+  },
+  {
+    "url": "teste.html",
+    "revision": "cf67c81a7b0f83015562a54dc45231cc"
   }
 ];
 
 const workboxSW = new self.WorkboxSW();
 workboxSW.precache(fileManifest);
-workboxSW.router.registerRoute('https://spreadsheets.google.com/*', workboxSW.strategies.cacheFirst({}), 'GET');
+workboxSW.router.registerRoute('https://spreadsheets.google.com/*', workboxSW.strategies.networkFirst({}), 'GET');
